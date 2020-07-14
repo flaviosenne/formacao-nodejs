@@ -1,0 +1,61 @@
+<%- include ('../../partials/header.ejs') %>
+<%- include ('../../partials/navbar.ejs') %>
+
+<div class="container">
+    <hr>
+    
+    <div class="card">
+        <div class="card-header">
+            <h2>Editar Artigo</h2>
+        </div>
+        <div class="card-body">
+            <input type="hidden" value = "<%=article.id%>">
+            <form method = "POST"action="/articles/update">
+                <input class = "form-control"type="text" name ='title' plceholder = "Defina o titulo do Artigo">
+                <br>
+                <textarea class = "form-control" id = 'article'
+                placeholder = "Escreva o artigo aqui"
+                name="body" id="" cols="30" rows="10"></textarea>
+                <br>
+                <label>Categoria</label>
+                <select class= "form-control"name="category" id="">
+                    <%  categories.forEach(category => {%>
+                        <% if(category.id == article.categoriumid){ %>
+                            <option selected value = "<%=category.id%>"><%=category.title%></option>
+                        <% } else { %>
+
+                            <option value = "<%=category.id%>"><%=category.title%></option>
+                        <% }%>
+                    <% }) %>
+                </select>
+                <br>
+                <button class = "btn btn-success"> Atualizar</button>
+            </form>
+
+        </div>
+    </div>
+</div>   
+
+<div id="content" style = "display: none;">
+    <%- article.body %>
+</div>
+    
+      
+<%- include ('../../partials/footer.ejs') %>
+
+<!-- Script responsvel pela conexão com o TinyMCE
+biblioteca responsvel para criação de tectos como
+word, com edição e formatação de texto-->
+<script src = '/tinymce/js/tinymce/tinymce.min.js'></script>
+<script>
+    tinymce.init({
+        language: 'pt_BR',
+        selector: '#article',
+        plugins: [
+            'advlist autolink link image lista print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        ],
+        init_instance_callback: () => {
+            tinymce.get('article').setContent($('#content').html())
+        }
+    })
+</script>

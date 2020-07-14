@@ -1,0 +1,55 @@
+<%- include ('../../partials/header.ejs') %>
+<%- include ('../../partials/navbar.ejs') %>
+
+<div class="container">
+    <hr>
+    <h2>Artigos</h2>
+    <a href = '/admin/articles/new' class = "btn btn-success"> Criar novo artigo</a>
+    <hr>
+    <table class= 'table table-bordered' >
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Slug</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% articles.forEach(article => { %> 
+                <tr>
+                    <td><%= article.id%></td>
+                    <td><%= article.title%></td>
+                    <td><%= article.slug%></td>
+                    <td><%= article.categorium.title%></td>
+                    <td>
+
+                        <form  style = "display: inline;"Method = "POST"action="/articles/delete" onsubmit ="confirmationDelete(event, this)">
+                            <input type="hidden" name = 'id' value = '<%=article.id%>'>
+                            <button class = 'btn btn-danger'>Deletar</button>
+                        </form>
+                    </td>
+                </tr>    
+            <% }) %>
+            
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<%- include ('../../partials/footer.ejs') %>
+<script>
+    function confirmationDelete(event, form){
+        event.preventDefault()
+        var decisao = confirm('Você quer deletar esse Artigo')
+
+        if(decisao){
+            form.submit()
+        }
+
+    }
+</script><%- include ('../../partials/header.ejs') %>
