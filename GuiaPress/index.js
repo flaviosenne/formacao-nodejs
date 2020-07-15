@@ -112,4 +112,4 @@ app.get('/category/:slug', (req, res) => {
         res.redirect('/')
     })
 })
-app.listen(8080, () => console.log('Server running'))
+app.listen(3000, () => console.log('Server running'))
