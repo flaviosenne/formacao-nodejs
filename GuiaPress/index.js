@@ -1,13 +1,29 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const app = express()
 const connection = require('./database/database')
+const session = require('express-session')
+
+const app = express()
+
+//sessions
+
+//Redis == banco de dados para salvar sessões
+app.use(session({
+    secret: 'rifjienfiotg934jf93jffij59fjddex',
+    cookie: {
+        maxAge: 300000000 // milisegundos 
+    }
+}))
+// imports controllers
 const CategoriesController = require('./categories/CategoriesControlle')
 const ArticlesController = require('./articles/ArticlesController')
+const UsersController = require('./user/UserController')
 
+// imports models
 const Article = require('./articles/Articles')
+const User = require('./user/User')
 const Category = require('./categories/Category')
-const Articles = require('./articles/Articles')
+
 // View engine
 app.set('view engine', 'ejs')
 
@@ -27,11 +43,18 @@ connection
 
     
     
+// route controllers  
+
+
 app.use('/', CategoriesController)
 app.use('/', ArticlesController)
+app.use('/', UsersController)
 
+
+
+// routes index
 app.get('/', (req, res) => {
-    Articles.findAll(
+    Article.findAll(
         {
             order: [['id', 'desc']],
             limit: 4
@@ -47,7 +70,7 @@ app.get('/', (req, res) => {
 
 app.get('/:slug', (req, res) => {
     const {slug} = req.params
-    Articles.findOne({
+    Article.findOne({
         where: {
             slug: slug
         }

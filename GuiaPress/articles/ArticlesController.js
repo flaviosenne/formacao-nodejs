@@ -3,7 +3,9 @@ const Category = require('../categories/Category')
 const Articles = require('./Articles')
 const slugify  = require('slugify')
 
-router.get('/admin/articles', (req, res)=> {
+const adminAuth = require('../middlewares/adminAuth')
+
+router.get('/admin/articles', adminAuth, (req, res)=> {
     Articles.findAll({
         // relacionamento de Categorias
         include: [{model: Category}]
@@ -11,7 +13,7 @@ router.get('/admin/articles', (req, res)=> {
         res.render('admin/articles/index', {articles: articles})
     })
 })
-router.get('/admin/articles/new', (req, res)=> {
+router.get('/admin/articles/new', adminAuth, (req, res)=> {
     Category.findAll().then(categories => {
         res.render('admin/articles/new', {categories: categories})
 
@@ -52,7 +54,7 @@ router.post('/articles/delete', (req, res) => {
     }
 })
 
-router.get('/admin/articles/edit/:id', (req, res) => {
+router.get('/admin/articles/edit/:id', adminAuth, (req, res) => {
     const {id} = req.params
 
     Articles.findByPk(id).then(article => {

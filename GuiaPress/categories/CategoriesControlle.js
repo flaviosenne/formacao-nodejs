@@ -2,7 +2,10 @@ const router = require('express').Router()
 const Category = require('./Category')
 const slugify = require('slugify')
 
-router.get('/admin/categories/new', (req, res) => {
+const adminAuth = require('../middlewares/adminAuth')
+
+
+router.get('/admin/categories/new', adminAuth, (req, res) => {
     res.render('admin/categories/new.ejs')
 })
 
@@ -23,7 +26,7 @@ router.post('/categories/save', async(req, res)=> {
     }
 })
 
-router.get('/admin/categories', async(req, res) => {
+router.get('/admin/categories', adminAuth, async(req, res) => {
     
     await Category.findAll().then(categories => {
         console.log('Cheguei aqui')
@@ -56,7 +59,7 @@ router.post('/categories/delete', (req, res) => {
     }
 })
 
-router.get('/admin/categories/edit/:id', (req, res) => {
+router.get('/admin/categories/edit/:id', adminAuth, (req, res) => {
     const {id} = req.params
   
     if(isNaN(id)){
