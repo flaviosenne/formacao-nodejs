@@ -1,0 +1,29 @@
+
+
+### get
+
+GET http://localhost:80/
+
+### post
+POST http://localhost:80/
+Content-Type: application/json
+
+{
+    "title":"final fantasy",
+    "year":2013,
+    "price":90
+}
+
+
+### Delete
+
+DELETE  http://localhost:80/2
+
+
+### put
+PUT http://localhost:80/2
+Content-Type: application/json
+
+{
+    "title":"final fantasy"
+}

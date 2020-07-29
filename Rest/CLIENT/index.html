@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Games</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+    
+</head>
+
+<body onload="get()">
+    <div class="fixed-top">
+        <div class="collapse" id="navbarToggleExternalContent">
+          <div class="bg-dark p-4">
+            <h5 class="text-white h4">Collapsed content</h5>
+            <span class="text-muted">Toggleable via the navbar brand.</span>
+          </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+      </div>
+      <hr>
+    <form action="" style="width: 70%; margin: 50px auto;">
+        <h2 style = 'text-align: center;'> Cadastro de Games</h2>
+        <label>
+            Titulo
+        </label>
+        <input value = ''name = 'title'class='form-control' id='title' type="text">
+
+        <label>
+            Ano
+        </label>
+        <input value = ''name = 'year'class='form-control' id='year' type="year">
+        <label>
+            Preço
+        </label>
+        <input value = ''name = 'price'class='form-control' id='price' type="number">
+
+        <button onClick ="create()"style='width: 60%; margin: 10px auto;' class="form-control btn-success">
+            Criar
+        </button>
+    </form>
+
+
+    <hr>
+    <table class="table" style="width: 80%; margin: 50px auto;">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">TITULO</th>
+                <th scope="col">ANO</th>
+                <th scope="col">PREÇO</th>
+            </tr>
+        </thead>
+        <tbody id='games'>
+
+        </tbody>
+    </table>
+
+    
+
+</body>
+<script src="./create.js"></script>
+</html>
