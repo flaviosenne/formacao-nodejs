@@ -2,7 +2,7 @@
 
 ### get
 
-GET http://localhost:80/
+GET http://localhost:80/game
 
 ### post
 POST http://localhost:80/

@@ -1,12 +1,11 @@
-const app = require('../app')
+const app = require('express').Router()
 const DB = require('../db/array')
 
-const Games =() => {
-app.get('/', (req, res)=> {
+app.get('/game', (req, res)=> {
     res.status(200)
     res.json(DB.games)
 })
-app.get('/:id', (req, res)=> {
+app.get('/game/:id', (req, res)=> {
     const {id}= req.params
 
     if(isNaN(id)){
@@ -24,7 +23,7 @@ app.get('/:id', (req, res)=> {
     }
 }),
 
-app.post('/', (req, res)=> {
+app.post('/game', (req, res)=> {
     const {title, price, year} =req.body
 
     DB.games.push({
@@ -37,7 +36,7 @@ app.post('/', (req, res)=> {
     res.json('cadastrado')
 }),
 
-app.delete('/:id', (req, res) => {
+app.delete('/game/:id', (req, res) => {
     const {id } = req.params
     
     if(isNaN(id)){
@@ -55,7 +54,7 @@ app.delete('/:id', (req, res) => {
     }
 }),
 
-app.put('/:id', (req, res)=> {
+app.put('/game/:id', (req, res)=> {
     const {id} = req.params
     if(isNaN(id)){
         res.sendStatus(400)
@@ -84,5 +83,4 @@ app.put('/:id', (req, res)=> {
         }
     }
 })
-}
-module.exports = Games()
+module.exports = app
