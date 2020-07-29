@@ -1,9 +1,12 @@
 const app = require('express').Router()
 const DB = require('../db/array')
+const auth = require('../middleware/auth')
 
-app.get('/game', (req, res)=> {
+app.get('/game', auth, (req, res)=> {
+    console.log(req.token)
+
     res.status(200)
-    res.json(DB.games)
+    res.json({token: req.token, games: DB.games})
 })
 app.get('/game/:id', (req, res)=> {
     const {id}= req.params

@@ -3,6 +3,7 @@
 ### get
 
 GET http://localhost:80/game
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJqb2FvQGVtYWlsLmNvbSIsImlhdCI6MTU5NjA2MDk5OCwiZXhwIjoxNTk2MjMzNzk4fQ.1oVMowIzxgoGYIP3ve6zF0nq5ZYyRSieLj62lY5qeN0
 
 ### post
 POST http://localhost:80/
@@ -26,4 +27,14 @@ Content-Type: application/json
 
 {
     "title":"final fantasy"
+}
+
+### post user
+
+POST http://localhost:80/auth
+Content-Type: application/json
+
+{
+    "email":"flavio@email.com",
+    "pass":"123"
 }
