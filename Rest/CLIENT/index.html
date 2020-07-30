@@ -18,41 +18,56 @@
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./index.js"></script>
-    
+    <script src="./login.js"></script>
+
 </head>
 
 <body onload="get()">
     <div class="fixed-top">
         <div class="collapse" id="navbarToggleExternalContent">
-          <div class="bg-dark p-4">
-            <h5 class="text-white h4">Collapsed content</h5>
-            <span class="text-muted">Toggleable via the navbar brand.</span>
-          </div>
+            <div class="bg-dark p-4">
+                <h5 class="text-white h4">Collapsed content</h5>
+                <span class="text-muted">Toggleable via the navbar brand.</span>
+            </div>
         </div>
         <nav class="navbar navbar-dark bg-dark">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </nav>
-      </div>
-      <hr>
+    </div>
+    <hr>
+    <br>
+    <div style="width: 50%; margin:10px auto;">
+
+        <h1 style ='text-align: center;'>Login</h1>
+        <input id = 'email'name = 'email'class='form-control' type="text" placeholder="exemplo@email.com">
+        <br>
+        <input id = 'pass'name = 'pass'class='form-control' type="password" placeholder="******">
+        <button onClick = 'login()'style='min-width: 40%; margin: 10px auto;' class="form-control btn-info">
+            Entrar
+        </button>
+    </div>
+    <hr>
     <form action="" style="width: 70%; margin: 50px auto;">
-        <h2 style = 'text-align: center;'> Cadastro de Games</h2>
+        <h2 style='text-align: center;'> Cadastro de Games</h2>
         <label>
             Titulo
         </label>
-        <input value = ''name = 'title'class='form-control' id='title' type="text">
+        <input value='' name='title' class='form-control' id='title' type="text">
 
         <label>
             Ano
         </label>
-        <input value = ''name = 'year'class='form-control' id='year' type="year">
+        <input value='' name='year' class='form-control' id='year' type="year">
         <label>
             Preço
         </label>
-        <input value = ''name = 'price'class='form-control' id='price' type="number">
+        <input value='' name='price' class='form-control' id='price' type="number">
 
-        <button onClick ="create()"style='width: 60%; margin: 10px auto;' class="form-control btn-success">
+        <button onClick="create()" style='width: 60%; margin: 10px auto;' class="form-control btn-success">
             Criar
         </button>
     </form>
@@ -73,8 +88,9 @@
         </tbody>
     </table>
 
-    
+
 
 </body>
 <script src="./create.js"></script>
+
 </html>

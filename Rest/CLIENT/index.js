@@ -1,6 +1,12 @@
-function get(){
-    axios.get('http://localhost:80').then(response => {
-    var games = response.data
+var axiosConfig = {
+    headers: {
+        Authorization: "Bearer "+ localStorage.getItem("token")
+    }
+}
+function get(){  
+
+    axios.get('http://localhost:80/game', axiosConfig).then(response => {
+    var games = response.data.games
     var list = document.getElementById('games')
     
     games.forEach(game => {
@@ -36,18 +42,19 @@ function get(){
 }
 
 function remove(id){
-    axios.delete('http://localhost:80/'+id).then(() => location.reload()).catch(err => console.log(err))
+    axios.delete('http://localhost:80/game/'+id, axiosConfig).then(() => location.reload()).catch(err => console.log(err))
 }
 
 function update({id, title, year, price}){
+    
     console.log(id, title, year, price)
     const title2 = document.getElementById('title').value = title,
     year2 = document.getElementById('year').value = year,
     price2 = document.getElementById('price').value = price
 
-    axios.update('http://localhost:80/'+id, {
+    axios.update('http://localhost:80/game'+id,{
         title: title2,
         year: year2,
         price: price2
-    }).then(() => location.reload()).catch(err => console.log(err))
+    }, axiosConfig).then(() => location.reload()).catch(err => console.log(err))
 }
