@@ -13,4 +13,7 @@ routes.get('/user/:id', UserController.findUser)
 routes.put('/user/:id', UserController.updateUser)
 routes.delete('/user/:id', UserController.delete)
 
+routes.post('/recover-password', UserController.recoveryPassword)
+routes.post('/change-password', UserController.changePassword)
+routes.post('/login', UserController.login)
 module.exports = routes

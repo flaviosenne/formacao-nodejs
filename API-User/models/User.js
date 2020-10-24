@@ -1,12 +1,13 @@
 const connection = require('../database/connection')
 const bcrypt = require('bcryptjs')
+const PasswordToken = require('./PasswordToken')
 
 const salt = bcrypt.genSaltSync(10)
 class User{
     async findAll(){
         try{
-
-            const result = await connection.select('id', 'name', 'email', 'role').table('user')
+            const result = await connection
+            .select('id', 'name', 'email', 'role').table('user')
 
             return result
         }
@@ -22,6 +23,23 @@ class User{
 
             const result = await connection.select('id', 'name', 'email', 'role')
             .where({id: id})
+            .table('user')
+            .first()
+
+            return result
+        }
+        catch(err){
+            console.log(err)
+            return err
+        }
+
+    }
+
+    async findByEmail(email){
+        try{
+
+            const result = await connection.select()
+            .where({email: email})
             .table('user')
             .first()
 
@@ -121,11 +139,17 @@ class User{
         }
         
         catch(err){
-            return {status: false, msg: 'Error serve'}
-            
+            return {status: false, msg: 'Error serve'}   
         }
 
+    }
 
+    async changePassword(newPassword, id, token){
+
+        const hash = await bcrypt.hashSync(newPassword, salt)
+
+        await connection.update({password: hash}).where({id: id}).table('user')
+        await PasswordToken.setUsed(token)
     }
 
 }
