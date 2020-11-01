@@ -103,16 +103,17 @@ class UserController {
 
         const user = await User.findByEmail(email)
 
-        if(!user) return res.status(400).json({msg: 'credeces invalid'})
+        if(!user) return res.status(400).json({msg: 'invalid credentials'})
 
         const pass = await bcrypt.compareSync(password, user.password)
 
-        if(!pass) return res.status(400).json({msg: 'credeces invalid'})
+        if(!pass) return res.status(400).json({msg: 'invalid credentials'})
         
         const token = jwt.sign({email: user.email, role: user.role}, secret)
 
         return res.status(200).json({token})
     }
+
 }
 
 module.exports= new UserController()

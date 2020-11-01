@@ -2,6 +2,7 @@ const {Router} = require('express')
 
 const HomeController = require('../controllers/HomeController')
 const UserController = require('../controllers/UserController')
+const AdminAuth = require('../middleware/AdminAuth')
 const auth = require('../middleware/AdminAuth')
 const routes = Router()
 
@@ -16,4 +17,5 @@ routes.delete('/user/:id', UserController.delete)
 routes.post('/recover-password', UserController.recoveryPassword)
 routes.post('/change-password', UserController.changePassword)
 routes.post('/login', UserController.login)
+routes.post('/validate', AdminAuth, HomeController.validate)
 module.exports = routes
