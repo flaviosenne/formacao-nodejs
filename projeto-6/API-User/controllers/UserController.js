@@ -50,7 +50,7 @@ class UserController {
             return res.status(404).json({msg: user.msg})
         }
         
-        return res.status(400).json({msg: user.msg})
+        return res.status(204).json({msg: user.msg})
 
     }
 

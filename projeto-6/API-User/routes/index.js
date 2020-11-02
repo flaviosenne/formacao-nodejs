@@ -12,7 +12,7 @@ routes.post('/user', UserController.create)
 routes.get('/user', auth, UserController.index)
 routes.get('/user/:id', UserController.findUser)
 routes.put('/user/:id', UserController.updateUser)
-routes.delete('/user/:id', UserController.delete)
+routes.delete('/user/:id',auth, UserController.delete)
 
 routes.post('/recover-password', UserController.recoveryPassword)
 routes.post('/change-password', UserController.changePassword)
