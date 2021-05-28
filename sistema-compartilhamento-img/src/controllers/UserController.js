@@ -6,13 +6,16 @@ class UserController {
         
         try{
 
+            if(name == '' || email == '' || password == ''){
+                return res.status(400).json(null)
+            }
             const user = new userModel({name, email, password})
             
             await user.save()
             
-            res.status(201).json({email})
+            return res.status(201).json({email})
         }catch(err){
-            res.sendStatus(500)
+            res.status(500).json(null)
         }
     }
 }

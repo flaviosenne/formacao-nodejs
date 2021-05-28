@@ -19,4 +19,19 @@ describe("insert user",()=> {
         })
         .catch(err => fail(err))
     })
+
+    it("should returns bad request if not provider someone data", ()=> {
+        let user = {
+            name: '',
+            email: '',
+            password: ''
+        }
+
+        return request.post("/users")
+        .send(user)
+        .then(res => {
+            expect(res.statusCode).toEqual(400)
+        })
+        .catch(err => fail(err))
+    })
 })
