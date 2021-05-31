@@ -34,4 +34,26 @@ describe("insert user",()=> {
         })
         .catch(err => fail(err))
     })
+
+    it("should returns bad request 400 if email already exists", ()=> {
+        let user = {
+            name: 'valid_name',
+            email: `${Date.now()}@email.com`,
+            password: 'valid_password'
+        }
+
+        return request.post("/users")
+        .send(user)
+        .then(res => {
+            expect(res.statusCode).toEqual(201)
+            expect(res.body.email).toEqual(user.email)
+
+            return request.post('/users').send(user).then(res => {
+
+                expect(res.statusCode).toEqual(400)
+                expect(res.body.error).toEqual("Email já cadastrado")
+            }).catch(err => fail(err))
+        })
+        .catch(err => fail(err))
+    })
 })

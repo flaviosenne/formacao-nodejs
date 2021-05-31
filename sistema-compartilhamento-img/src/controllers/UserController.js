@@ -4,12 +4,15 @@ class UserController {
     async save(req, res) {
         const {name, email, password} = req.body
         
+        if(name == '' || email == '' || password == ''){
+            return res.status(400).json(null)
+        }
         try{
-
-            if(name == '' || email == '' || password == ''){
-                return res.status(400).json(null)
-            }
-            const user = new userModel({name, email, password})
+            let user = await userModel.findOne({email})
+            
+            if(user) return res.status(400).json({error:"Email já cadastrado"})
+        
+            user = new userModel({name, email, password})
             
             await user.save()
             
