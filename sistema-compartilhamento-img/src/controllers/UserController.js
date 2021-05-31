@@ -1,4 +1,5 @@
 const { userModel } = require("../model/User")
+const bcrypt = require('bcrypt')
 
 class UserController {
     async save(req, res) {
@@ -12,7 +13,10 @@ class UserController {
             
             if(user) return res.status(400).json({error:"Email já cadastrado"})
         
-            user = new userModel({name, email, password})
+            const salt = await bcrypt.genSalt(10)
+            const hash = await bcrypt.hash(password, salt)
+
+            user = new userModel({name, email, password: hash})
             
             await user.save()
             
