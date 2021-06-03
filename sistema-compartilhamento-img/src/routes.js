@@ -9,5 +9,6 @@ routes.get('/', (req, res) => {
 
 routes.post("/users", userController.save)
 routes.delete("/users/:email", userController.delete)
+routes.post("/auth", userController.login)
 
 module.exports = {routes}

@@ -1,5 +1,7 @@
 const { userModel } = require("../model/User")
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const secret = 'alguma coisa bem dificil de decifrar'
 
 class UserController {
     async save(req, res) {
@@ -25,9 +27,21 @@ class UserController {
             res.status(500).json(null)
         }
     }
+
     async delete(req, res) {
         let user = await userModel.deleteOne({email: req.params.email})
         return res.status(204).json(null)
+    }
+
+    async login(req, res){
+        const {email, password} = req.body
+        jwt.sign({email}, secret, {expiresIn: '48h'}, (err, token) => {
+            if(err){
+                console.log(err)
+                return res.status(500).json(null)
+            }
+            return res.status(200).json({token})
+        })    
     }
 }
 

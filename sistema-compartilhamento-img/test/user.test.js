@@ -70,3 +70,15 @@ describe("insert user",()=> {
         .catch(err => fail(err))
     })
 })
+
+describe("authentication", () => {
+    it('should returns token when login successful', () => {
+        return request.post('/auth')
+        .send({email: mainUser.email, password: mainUser.password})
+        .then(res => {
+            expect(res.status).toEqual(200)
+            expect(res.body.token).toBeDefined()
+        })
+        .catch(err => fail(err))
+    })
+})
