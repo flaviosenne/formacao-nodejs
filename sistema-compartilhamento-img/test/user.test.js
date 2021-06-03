@@ -2,6 +2,19 @@ const app = require('../src/app')
 const supertest =require('supertest')
 let request = supertest(app)
 
+let mainUser = {name: 'joao', email:'joao@email.com', password: '123'}
+beforeAll(() => {
+    return request.post('/users')
+    .send(mainUser)
+    .then(res => {})
+    .catch(err=> console.log(err))
+})
+
+afterAll(() => {
+    return request.delete(`/users/${mainUser.email}`)
+    .then(res => {})
+    .catch(err=> console.log(err))
+})
 
 describe("insert user",()=> {
     it("should add an user with successful",()=> {

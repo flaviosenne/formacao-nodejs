@@ -25,6 +25,10 @@ class UserController {
             res.status(500).json(null)
         }
     }
+    async delete(req, res) {
+        let user = await userModel.deleteOne({email: req.params.email})
+        return res.status(204).json(null)
+    }
 }
 
 module.exports = { UserController}
