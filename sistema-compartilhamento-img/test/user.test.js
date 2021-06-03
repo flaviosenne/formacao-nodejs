@@ -81,4 +81,24 @@ describe("authentication", () => {
         })
         .catch(err => fail(err))
     })
+
+    it('should returns status 403 when email not found in DB',() => {
+        return request.post('/auth')
+        .send({email: "nao_existe@email.com", password: mainUser.password})
+        .then(res => {
+            expect(res.status).toEqual(403)
+            expect(res.body.errors.email).toEqual("Email não cadastrado")
+        })
+        .catch(err => fail(err))
+    })
+
+    it('should returns status 403 when password not found in DB',() => {
+        return request.post('/auth')
+        .send({email: mainUser.email, password: "senha errada"})
+        .then(res => {
+            expect(res.status).toEqual(403)
+            expect(res.body.errors.password).toEqual("Senha incorreta")
+        })
+        .catch(err => fail(err))
+    })
 })

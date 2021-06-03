@@ -35,6 +35,15 @@ class UserController {
 
     async login(req, res){
         const {email, password} = req.body
+
+        let user = await userModel.findOne({email})
+
+        if(!user) return res.status(403).json({errors: {email: 'Email não cadastrado'}})
+
+        let matchers = await bcrypt.compare(password, user.password)
+
+        if(!matchers) return res.status(403).json({errors: {password: 'Senha incorreta'}})
+
         jwt.sign({email}, secret, {expiresIn: '48h'}, (err, token) => {
             if(err){
                 console.log(err)
