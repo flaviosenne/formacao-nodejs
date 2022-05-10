@@ -7,7 +7,7 @@ MercadoPago.configure({
     // serve para dizer se está em desenvolvimento ou produção
     // true quer dizer que está em desenvolvimento
     sandBox: true,
-    access_token: 'TEST-1184271242648905-110422-06fb1475eb7ae61d39a879659edf98d7-223205371'
+    access_token: 'TEST-Token'
 })
 
 app.get('/', (req, res) => {
